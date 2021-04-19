@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FrancescasMenu.Views.WineCollectionPage"
+             xmlns:vm="clr-namespace:FrancescasMenu.ViewModels"
+             xmlns:local="clr-namespace:FrancescasMenu.ViewModels"  
+             xmlns:model="clr-namespace:FrancescasMenu.Model"  
+             x:Name="WineCollectionView"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:WineCollectionViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh" Command="{Binding LoadWinesCommand}" />
+        <ToolbarItem Text="Add" Command="{Binding NavigateToAddWineCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Wine List" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <RefreshView x:DataType="local:WineCollectionViewModel" Command="{Binding LoadWinesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="ItemsListView" ItemsSource="{Binding WineCollection}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" x:DataType="model:Wine">
+                                <Label Text="{Binding Name}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Source={RelativeSource AncestorType={x:Type local:WineCollectionViewModel}}, Path=ItemTapped}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
