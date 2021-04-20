@@ -148,4 +148,7 @@
       <Name>FrancescasMenu</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Francescas.png" />
+  </ItemGroup>
 </Project>

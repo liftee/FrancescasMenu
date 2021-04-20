@@ -12,9 +12,9 @@ namespace FrancescasMenu
     public partial class App : Application
     {
         public static Realms.Sync.App RealmApp;
+        
         private const string appId = "";
         public static string adminAKey = "";
-      
 
         public App()
         {
